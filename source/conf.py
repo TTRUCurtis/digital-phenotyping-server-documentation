@@ -24,5 +24,12 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+import os
+import sys
+sys.path.insert(0, os.path.abspath('..'))  # to import project modules if needed
+
+# Theme
+html_theme = 'sphinx_rtd_theme'
+
+# Output directory
 html_static_path = ['_static']
