@@ -81,27 +81,64 @@
   <section id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h1>
 <p><strong>Requirements:</strong>
-- Python 3.8+
-- MySQL 8.x
-- virtualenv (recommended)</p>
+- OS Packages</p>
+<blockquote>
+<div><ul>
+<li><p>Python 3.8+</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>pip 24.0</p></li>
+<li><p>virtualenv</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>MySQL 8.x</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p>Python Packages</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>APScheduler 3.10.4</p></li>
+<li><p>Flask 3.1.0</p></li>
+<li><p>Flask-APScheduler 1.13.1</p></li>
+<li><p>Flask-SQLAlchemy 3.1.1</p></li>
+<li><p>google-api-core 2.24.2</p></li>
+<li><p>google-api-python-client 2.166.0</p></li>
+<li><p>google-auth 2.38.0</p></li>
+<li><p>google-auth-httplib2 0.2.0</p></li>
+<li><p>google-auth-oauthlib 1.2.1</p></li>
+<li><p>googleapis-common-protos 1.69.2</p></li>
+<li><p>gunicorn 23.0.0</p></li>
+<li><p>mysql-connector-python 9.1.0</p></li>
+<li><p>pandas 2.2.3</p></li>
+<li><p>requests 2.32.3</p></li>
+<li><p>sendgrid 6.11.0</p></li>
+<li><p>Sphinx 8.2.3</p></li>
+<li><p>SQLAlchemy 2.0.36</p></li>
+<li><p>twilio 9.3.7</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
 <p><strong>Steps:</strong></p>
 <ol class="arabic">
+<li><p>Confirm the OS packages listed above are installed and are working.</p></li>
+<li><p>Create virtual environment:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>&lt;environment_name&gt;
+<span class="nb">source</span><span class="w"> </span>&lt;environment_name&gt;/bin/activate
+</pre></div>
+</div>
+</div></blockquote>
+</li>
 <li><p>Clone the repository:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-org/your-flask-server.git
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-org/your-flask-server.git
 <span class="nb">cd</span><span class="w"> </span>your-flask-server
 </pre></div>
 </div>
-</li>
-<li><p>Create virtual environment:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
-<span class="nb">source</span><span class="w"> </span>venv/bin/activate
-</pre></div>
-</div>
-</li>
-<li><p>Install dependencies:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-</pre></div>
-</div>
+</div></blockquote>
 </li>
 <li><p>Configure environment:</p>
 <p>Copy <cite>.env.example</cite> to <cite>.env</cite> and update credentials.</p>

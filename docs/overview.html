@@ -44,7 +44,18 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#system-architecture">System Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aware-server"><strong>1. aware-server</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#twilio-server"><strong>2. twilio-server</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qualtrics-server"><strong>3. qualtrics-server</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#study-info-page"><strong>3. study-info-page</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment-details">Deployment Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
@@ -80,14 +91,71 @@
              
   <section id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
-<p>This Flask application serves as a backend service connected to a MySQL database containing multiple tables.</p>
-<p><strong>Features:</strong>
-- RESTful API endpoints to interact with database tables
-- JSON response formatting
-- SQLAlchemy ORM integration (optional)
-- Centralized logging
-- Secure configuration handling via <cite>.env</cite></p>
-<p><strong>Source Code:</strong> <a class="reference external" href="https://github.com/your-org/your-flask-server">https://github.com/your-org/your-flask-server</a></p>
+<p>This documentation provides an overview of a multi-server Flask system used for participant tracking, communication, and survey management for the Digital Phenotyping Study. The system consists of three core microservices:</p>
+<ol class="arabic simple">
+<li><p><strong>aware-server</strong></p></li>
+<li><p><strong>twilio-server</strong></p></li>
+<li><p><strong>qualtrics-server</strong></p></li>
+<li><p><strong>study-info-page</strong></p></li>
+</ol>
+<p>Each server is independently deployed using <strong>Gunicorn</strong> behind <strong>NGINX</strong> for scalability and production readiness. They communicate with MySQL database to log, track, and manage participant data.</p>
+<section id="system-architecture">
+<h2>System Architecture<a class="headerlink" href="#system-architecture" title="Link to this heading"></a></h2>
+<p>The system is divided into the following components:</p>
+<section id="aware-server">
+<h3><strong>1. aware-server</strong><a class="headerlink" href="#aware-server" title="Link to this heading"></a></h3>
+<p>The <cite>aware-server</cite> handles passive health signal data from participants’ mobile phones. Specifically, it receives periodic health signals and device information, for the initial health check, such as phone model, operating system version, android SDK, and other metadata relevant to the participant’s mobile environment.</p>
+<p>Key functionalities:
+- Health ping endpoint for validating device connectivity
+- Capture and log mobile device metadata
+- Insert data into a dedicated MySQL table for device monitoring</p>
+</section>
+<section id="twilio-server">
+<h3><strong>2. twilio-server</strong><a class="headerlink" href="#twilio-server" title="Link to this heading"></a></h3>
+<p>The <cite>twilio-server</cite> is responsible for all participant-facing communication. It sends SMS and/or email messages using Twilio’s API and SendGrid respectively. This server also logs every notification sent, allowing for later auditing and report generation.</p>
+<p>Key functionalities:
+- Send registration, welcome, baseline, daily, and reminder messages
+- Support for both SMS (Twilio) and email (SendGrid)
+- Log notification history in a MySQL table for reporting</p>
+</section>
+<section id="qualtrics-server">
+<h3><strong>3. qualtrics-server</strong><a class="headerlink" href="#qualtrics-server" title="Link to this heading"></a></h3>
+<p>The <cite>qualtrics-server</cite> is the central logic hub of the system. It manages participant onboarding, survey logic, CRON-based scheduling for daily and follow-up surveys, and validation of survey access. It also tracks participant survey completion by storing study identifiers (studyID) and Qualtrics response IDs.</p>
+<p>Key functionalities:
+- Participant registration and onboarding</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>checking for fraudulent participants and blocking them</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Daily and monthly survey distribution via scheduled jobs</p></li>
+<li><p>Access validation for surveys based on participation criteria</p></li>
+<li><p>Store minimal survey metadata for tracking and compliance</p></li>
+</ul>
+</section>
+<section id="study-info-page">
+<h3><strong>3. study-info-page</strong><a class="headerlink" href="#study-info-page" title="Link to this heading"></a></h3>
+<p>The <cite>study-page-server</cite> is a front-end-focused Flask application that provides participants with access to public-facing study information. It assists new participants in getting started, including installing the Android app, reviewing frequently asked questions, and learning about the study goals.</p>
+<p>Key functionalities:
+- Web front-end for study instructions and app onboarding
+- Displays FAQ, contact info, and overview of the study
+- Static and templated pages for easy customization</p>
+</section>
+</section>
+<section id="deployment-details">
+<h2>Deployment Details<a class="headerlink" href="#deployment-details" title="Link to this heading"></a></h2>
+<p>Each server is deployed as a standalone Flask application using the following stack:</p>
+<ul class="simple">
+<li><p><strong>Gunicorn</strong>: WSGI HTTP server to serve the Flask applications</p></li>
+<li><p><strong>NGINX</strong>: Acts as a reverse proxy and load balancer</p></li>
+<li><p><strong>MySQL</strong>: Central database for storing participant data and system logs</p></li>
+</ul>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>This architecture allows for modular, scalable, and secure tracking of participant engagement and survey management. Each component is independently deployable, making the system robust to faults and easy to maintain or extend.</p>
+</section>
 </section>
 
 
