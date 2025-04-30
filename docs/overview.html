@@ -105,30 +105,35 @@
 <section id="aware-server">
 <h3><strong>1. aware-server</strong><a class="headerlink" href="#aware-server" title="Link to this heading"></a></h3>
 <p>The <cite>aware-server</cite> handles passive health signal data from participants’ mobile phones. Specifically, it receives periodic health signals and device information, for the initial health check, such as phone model, operating system version, android SDK, and other metadata relevant to the participant’s mobile environment.</p>
-<p>Key functionalities:
-- Health ping endpoint for validating device connectivity
-- Capture and log mobile device metadata
-- Insert data into a dedicated MySQL table for device monitoring</p>
+<p>Key functionalities:</p>
+<ul class="simple">
+<li><p>Health ping endpoint for validating device connectivity</p></li>
+<li><p>Capture and log mobile device metadata</p></li>
+<li><p>Insert data into a dedicated MySQL table for device monitoring</p></li>
+</ul>
 </section>
 <section id="twilio-server">
 <h3><strong>2. twilio-server</strong><a class="headerlink" href="#twilio-server" title="Link to this heading"></a></h3>
 <p>The <cite>twilio-server</cite> is responsible for all participant-facing communication. It sends SMS and/or email messages using Twilio’s API and SendGrid respectively. This server also logs every notification sent, allowing for later auditing and report generation.</p>
-<p>Key functionalities:
-- Send registration, welcome, baseline, daily, and reminder messages
-- Support for both SMS (Twilio) and email (SendGrid)
-- Log notification history in a MySQL table for reporting</p>
+<p>Key functionalities:</p>
+<ul class="simple">
+<li><p>Send registration, welcome, baseline, daily, and reminder messages</p></li>
+<li><p>Support for both SMS (Twilio) and email (SendGrid)</p></li>
+<li><p>Log notification history in a MySQL table for reporting</p></li>
+</ul>
 </section>
 <section id="qualtrics-server">
 <h3><strong>3. qualtrics-server</strong><a class="headerlink" href="#qualtrics-server" title="Link to this heading"></a></h3>
 <p>The <cite>qualtrics-server</cite> is the central logic hub of the system. It manages participant onboarding, survey logic, CRON-based scheduling for daily and follow-up surveys, and validation of survey access. It also tracks participant survey completion by storing study identifiers (studyID) and Qualtrics response IDs.</p>
-<p>Key functionalities:
-- Participant registration and onboarding</p>
-<blockquote>
-<div><ul class="simple">
+<p>Key functionalities:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Participant registration and onboarding</dt><dd><ul>
 <li><p>checking for fraudulent participants and blocking them</p></li>
 </ul>
-</div></blockquote>
-<ul class="simple">
+</dd>
+</dl>
+</li>
 <li><p>Daily and monthly survey distribution via scheduled jobs</p></li>
 <li><p>Access validation for surveys based on participation criteria</p></li>
 <li><p>Store minimal survey metadata for tracking and compliance</p></li>
@@ -137,10 +142,12 @@
 <section id="study-info-page">
 <h3><strong>3. study-info-page</strong><a class="headerlink" href="#study-info-page" title="Link to this heading"></a></h3>
 <p>The <cite>study-page-server</cite> is a front-end-focused Flask application that provides participants with access to public-facing study information. It assists new participants in getting started, including installing the Android app, reviewing frequently asked questions, and learning about the study goals.</p>
-<p>Key functionalities:
-- Web front-end for study instructions and app onboarding
-- Displays FAQ, contact info, and overview of the study
-- Static and templated pages for easy customization</p>
+<p>Key functionalities:</p>
+<ul class="simple">
+<li><p>Web front-end for study instructions and app onboarding</p></li>
+<li><p>Displays FAQ, contact info, and overview of the study</p></li>
+<li><p>Static and templated pages for easy customization</p></li>
+</ul>
 </section>
 </section>
 <section id="deployment-details">
