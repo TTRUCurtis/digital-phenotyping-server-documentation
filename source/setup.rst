@@ -6,7 +6,6 @@ Requirements
 ------------
 
 - OS Packages
-~~~~~~~~~~~~~
 
     - Python 3.8+
 
@@ -16,7 +15,6 @@ Requirements
     - MySQL 8.x
 
 - Python Packages
-~~~~~~~~~~~~~~~~~
 
     - APScheduler 3.10.4
     - Flask 3.1.0
