@@ -128,25 +128,77 @@
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>&lt;environment_name&gt;
 <span class="nb">source</span><span class="w"> </span>&lt;environment_name&gt;/bin/activate
+&lt;environment_name&gt;/bin/python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>&lt;optional_path&gt;/requirements.txt
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Clone the repository:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-org/your-flask-server.git
-<span class="nb">cd</span><span class="w"> </span>your-flask-server
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/TTRUCurtis/digital-phenotyping-server.git
+<span class="nb">cd</span><span class="w"> </span>digital-phenotyping-server
+git<span class="w"> </span>checkout<span class="w"> </span>dev
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Configure environment:</p>
-<p>Copy <cite>.env.example</cite> to <cite>.env</cite> and update credentials.</p>
-</li>
-<li><p>Run the server locally:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>flask<span class="w"> </span>run
+<li><p>Create services for each of the servers:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/systemd/system/
+sudo<span class="w"> </span>nano<span class="w"> </span>&lt;server_name&gt;.service
 </pre></div>
 </div>
+<ul>
+<li><p>Copy the following code inside the file:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>Gunicorn<span class="w"> </span>instance<span class="w"> </span>to<span class="w"> </span>serve<span class="w"> </span>&lt;server_name&gt;<span class="w"> </span>flask<span class="w"> </span>app
+<span class="nv">After</span><span class="o">=</span>network.target
+
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">User</span><span class="o">=</span>&lt;user&gt;
+<span class="nv">WorkingDirectory</span><span class="o">=</span>/home/&lt;user&gt;/digital-phenotyping-server/&lt;server_name&gt;
+<span class="nv">Environment</span><span class="o">=</span><span class="s2">&quot;TZ=America/New_York&quot;</span>
+<span class="nv">ExecStart</span><span class="o">=</span>/home/&lt;user&gt;/dps-env/bin/gunicorn<span class="w"> </span>--bind<span class="w"> </span><span class="m">127</span>.0.0.1:&lt;port_number&gt;<span class="w"> </span>--preload<span class="w"> </span>run:app
+
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Once all the required service files have been created</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>&lt;server_name&gt;<span class="w"> </span><span class="c1"># To start the server</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>&lt;server_name&gt;<span class="w"> </span><span class="c1"># To check the status of the server</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>&lt;server_name&gt;<span class="w"> </span><span class="c1"># To deploy any changes made to the server</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Logs are captured in the logs directory inside each server’s directory. To view all logs or crashes use the following command</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>journalctl<span class="w"> </span>-u<span class="w"> </span>&lt;server_name&gt;.service<span class="w"> </span>-n<span class="w"> </span>&lt;optional_number_of_lines&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" start="6">
+<li><p>In Nginx create a proxy pass for each of the server’s port_number. Below is a sample proxy pass. For a better guide on this please refer to <a class="reference external" href="https://nginx.org/en/docs/http/configuring_https_servers.html">Configuring HTTPS Servers in NGINX</a></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
+location<span class="w"> </span>/&lt;server&gt;/<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>proxy_pass<span class="w"> </span>http://127.0.0.1:&lt;port_number&gt;/<span class="p">;</span>
+<span class="o">}</span>
+...
+</pre></div>
+</div>
+</div></blockquote>
 </li>
 </ol>
 </section>

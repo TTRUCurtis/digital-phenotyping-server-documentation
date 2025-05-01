@@ -42,20 +42,61 @@ Setup
 
       python3 -m venv <environment_name>
       source <environment_name>/bin/activate
+      <environment_name>/bin/python -m pip install -r <optional_path>/requirements.txt
 
 3. Clone the repository:
 
     .. code-block:: bash
 
-      git clone https://github.com/your-org/your-flask-server.git
-      cd your-flask-server
+      git clone https://github.com/TTRUCurtis/digital-phenotyping-server.git
+      cd digital-phenotyping-server
+      git checkout dev
 
-4. Configure environment:
+4. Create services for each of the servers:
 
-   Copy `.env.example` to `.env` and update credentials.
+    .. code-block:: bash
 
-5. Run the server locally:
+        cd /etc/systemd/system/
+        sudo nano <server_name>.service
+    
+    * Copy the following code inside the file:
 
-   .. code-block:: bash
+        .. code-block:: bash
 
-      flask run
+            [Unit]
+            Description=Gunicorn instance to serve <server_name> flask app
+            After=network.target
+
+            [Service]
+            User=<user>
+            WorkingDirectory=/home/<user>/digital-phenotyping-server/<server_name>
+            Environment="TZ=America/New_York"
+            ExecStart=/home/<user>/dps-env/bin/gunicorn --bind 127.0.0.1:<port_number> --preload run:app
+
+            [Install]
+            WantedBy=multi-user.target
+    
+    * Once all the required service files have been created
+
+        .. code-block:: bash
+
+            sudo systemctl daemon-reload
+            sudo systemctl start <server_name> # To start the server
+            sudo systemctl status <server_name> # To check the status of the server
+            sudo systemctl restart <server_name> # To deploy any changes made to the server
+    
+    * Logs are captured in the logs directory inside each server's directory. To view all logs or crashes use the following command
+
+        .. code-block:: bash
+            
+            journalctl -u <server_name>.service -n <optional_number_of_lines>
+
+6. In Nginx create a proxy pass for each of the server's port_number. Below is a sample proxy pass. For a better guide on this please refer to `Configuring HTTPS Servers in NGINX <https://nginx.org/en/docs/http/configuring_https_servers.html>`_
+
+    .. code-block:: bash
+
+        ...
+        location /<server>/ {
+            proxy_pass http://127.0.0.1:<port_number>/;
+        }
+        ...

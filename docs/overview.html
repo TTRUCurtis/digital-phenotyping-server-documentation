@@ -45,7 +45,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#system-architecture">System Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#system-architecture-overview">System Architecture Overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#aware-server"><strong>1. aware-server</strong></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#twilio-server"><strong>2. twilio-server</strong></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#qualtrics-server"><strong>3. qualtrics-server</strong></a></li>
@@ -99,8 +99,8 @@
 <li><p><strong>study-info-page</strong></p></li>
 </ol>
 <p>Each server is independently deployed using <strong>Gunicorn</strong> behind <strong>NGINX</strong> for scalability and production readiness. They communicate with MySQL database to log, track, and manage participant data.</p>
-<section id="system-architecture">
-<h2>System Architecture<a class="headerlink" href="#system-architecture" title="Link to this heading"></a></h2>
+<section id="system-architecture-overview">
+<h2>System Architecture Overview<a class="headerlink" href="#system-architecture-overview" title="Link to this heading"></a></h2>
 <p>The system is divided into the following components:</p>
 <section id="aware-server">
 <h3><strong>1. aware-server</strong><a class="headerlink" href="#aware-server" title="Link to this heading"></a></h3>
@@ -127,13 +127,8 @@
 <p>The <cite>qualtrics-server</cite> is the central logic hub of the system. It manages participant onboarding, survey logic, CRON-based scheduling for daily and follow-up surveys, and validation of survey access. It also tracks participant survey completion by storing study identifiers (studyID) and Qualtrics response IDs.</p>
 <p>Key functionalities:</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt>Participant registration and onboarding</dt><dd><ul>
+<li><p>Participant registration and onboarding</p></li>
 <li><p>checking for fraudulent participants and blocking them</p></li>
-</ul>
-</dd>
-</dl>
-</li>
 <li><p>Daily and monthly survey distribution via scheduled jobs</p></li>
 <li><p>Access validation for surveys based on participation criteria</p></li>
 <li><p>Store minimal survey metadata for tracking and compliance</p></li>

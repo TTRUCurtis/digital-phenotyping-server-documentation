@@ -10,8 +10,8 @@ This documentation provides an overview of a multi-server Flask system used for 
 
 Each server is independently deployed using **Gunicorn** behind **NGINX** for scalability and production readiness. They communicate with MySQL database to log, track, and manage participant data.
 
-System Architecture
--------------------
+System Architecture Overview
+----------------------------
 
 The system is divided into the following components:
 
@@ -42,7 +42,7 @@ The `qualtrics-server` is the central logic hub of the system. It manages partic
 Key functionalities:
 
 - Participant registration and onboarding
-    - checking for fraudulent participants and blocking them
+- checking for fraudulent participants and blocking them
 - Daily and monthly survey distribution via scheduled jobs
 - Access validation for surveys based on participation criteria
 - Store minimal survey metadata for tracking and compliance
