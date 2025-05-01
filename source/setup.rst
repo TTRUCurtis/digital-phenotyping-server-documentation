@@ -1,10 +1,12 @@
 Setup
 =====
 
+
 Requirements
 ------------
 
 - OS Packages
+~~~~~~~~~~~~~
 
     - Python 3.8+
 
@@ -14,6 +16,7 @@ Requirements
     - MySQL 8.x
 
 - Python Packages
+~~~~~~~~~~~~~~~~~
 
     - APScheduler 3.10.4
     - Flask 3.1.0
@@ -33,6 +36,7 @@ Requirements
     - Sphinx 8.2.3
     - SQLAlchemy 2.0.36
     - twilio 9.3.7
+
 
 Steps
 -----
