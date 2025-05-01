@@ -2,6 +2,8 @@ Setup
 =====
 
 **Requirements:**
+-----------------
+
 - OS Packages
 
     - Python 3.8+
@@ -33,6 +35,7 @@ Setup
     - twilio 9.3.7
 
 **Steps:**
+----------
 
 1. Confirm the OS packages listed above are installed and are working.
 
