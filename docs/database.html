@@ -108,47 +108,68 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>recordId
-studyId
-createdDate
-phone
-email
-completedDate
-contactPref
-timezone
-phoneId</p></td>
-<td><p>int
-varchar(17)
-datetime
-varchar(10)
-text
-datetime
-enum(‘sms’,’email’,’both’)
-enum(‘EST’,’MST’,’PST’,’CST’,’AKST’,’HST’)
-varchar(16)</p></td>
-<td><p>NO
-NO
-YES
-NO
-NO
-NO
-NO
-NO
-YES</p></td>
+<tr class="row-even"><td><p>recordId</p></td>
+<td><p>int</p></td>
+<td><p>NO</p></td>
 <td><p>PRI</p></td>
-<td><p>NULL
-NULL
-CURRENT_TIMESTAMP
-NULL
-NULL
-CURRENT_TIMESTAMP
-sms
-EST
-NULL</p></td>
-<td><p>auto_increment</p>
-<p>DEFAULT_GENERATED</p>
-<p>DEFAULT_GENERATED</p>
-</td>
+<td><p>NULL</p></td>
+<td><p>auto_increment</p></td>
+</tr>
+<tr class="row-odd"><td><p>studyId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>createdDate</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>CURRENT_TIMESTAMP</p></td>
+<td><p>DEFAULT_GENERATED</p></td>
+</tr>
+<tr class="row-odd"><td><p>phone</p></td>
+<td><p>varchar(10)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>email</p></td>
+<td><p>text</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>completedDate</p></td>
+<td><p>datetime</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>CURRENT_TIMESTAMP</p></td>
+<td><p>DEFAULT_GENERATED</p></td>
+</tr>
+<tr class="row-even"><td><p>contactPref</p></td>
+<td><p>enum(‘sms’,’email’,’both’)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>sms</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>timezone</p></td>
+<td><p>enum(‘EST’,’MST’,’PST’,’CST’,’AKST’,’HST’)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>EST</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>phoneId</p></td>
+<td><p>varchar(16)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -166,42 +187,61 @@ NULL</p></td>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>recordId
-studyId
-notificationType
-createdDate
-messageSID
-messageType
-messageStatus
-statusUpdateTime</p></td>
-<td><p>int
-varchar(17)
-enum(‘daily’,’monthly’,’reminder’,’missed-aware’,’missed-survey’,’baseline’,’welcome’,’register’,’none’)
-datetime
-text
-enum(‘sms’,’email’)
-text
-datetime</p></td>
-<td><p>NO
-YES
-YES
-YES
-YES
-YES
-YES
-YES</p></td>
+<tr class="row-even"><td><p>recordId</p></td>
+<td><p>int</p></td>
+<td><p>NO</p></td>
 <td><p>PRI</p></td>
-<td><p>NULL
-NULL
-NULL
-CURRENT_TIMESTAMP
-NULL
-NULL
-NULL
-NULL</p></td>
-<td><p>auto_increment</p>
-<p>DEFAULT_GENERATED</p>
-</td>
+<td><p>NULL</p></td>
+<td><p>auto_increment</p></td>
+</tr>
+<tr class="row-odd"><td><p>studyId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>notificationType</p></td>
+<td><p>enum(‘daily’,’monthly’,’reminder’,’missed-aware’,’missed-survey’,’baseline’,’welcome’,’register’,’none’)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>createdDate</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>CURRENT_TIMESTAMP</p></td>
+<td><p>DEFAULT_GENERATED</p></td>
+</tr>
+<tr class="row-even"><td><p>messageSID</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>messageType</p></td>
+<td><p>enum(‘sms’,’email’)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>messageStatus</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>statusUpdateTime</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -219,36 +259,54 @@ NULL</p></td>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>recordId
-studyId
-responseId
-completedDate
-weekday
-type
-surveyDate</p></td>
-<td><p>int
-varchar(17)
-varchar(17)
-datetime
-enum(‘monday’,’tuesday’,’wednesday’,’thursday’,’friday’,’saturday’,’sunday’)
-enum(‘consent’,’baseline’,’daily’,’weekly’,’monthly’)
-date</p></td>
-<td><p>NO
-NO
-YES
-YES
-YES
-YES
-YES</p></td>
+<tr class="row-even"><td><p>recordId</p></td>
+<td><p>int</p></td>
+<td><p>NO</p></td>
 <td><p>PRI</p></td>
-<td><p>NULL
-NULL
-NULL
-NULL
-NULL
-NULL
-NULL</p></td>
+<td><p>NULL</p></td>
 <td><p>auto_increment</p></td>
+</tr>
+<tr class="row-odd"><td><p>studyId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>responseId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>completedDate</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>weekday</p></td>
+<td><p>enum(‘monday’,’tuesday’,’wednesday’,’thursday’,’friday’,’saturday’,’sunday’)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p>enum(‘consent’,’baseline’,’daily’,’weekly’,’monthly’)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>surveyDate</p></td>
+<td><p>date</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -266,31 +324,40 @@ NULL</p></td>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>recordId
-studyId
-updatedDate
-enrolled
-createdDate</p></td>
-<td><p>int
-varchar(17)
-datetime
-enum(‘0’,’1’,’2’,’3’,’4’)
-datetime</p></td>
-<td><p>NO
-NO
-YES
-NO
-YES</p></td>
+<tr class="row-even"><td><p>recordId</p></td>
+<td><p>int</p></td>
+<td><p>NO</p></td>
 <td><p>PRI</p></td>
-<td><p>NULL
-NULL
-CURRENT_TIMESTAMP
-NULL
-CURRENT_TIMESTAMP</p></td>
-<td><p>auto_increment</p>
-<p>DEFAULT_GENERATED on update CURRENT_TIMESTAMP</p>
-<p>DEFAULT_GENERATED</p>
-</td>
+<td><p>NULL</p></td>
+<td><p>auto_increment</p></td>
+</tr>
+<tr class="row-odd"><td><p>studyId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>updatedDate</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>CURRENT_TIMESTAMP</p></td>
+<td><p>DEFAULT_GENERATED on update CURRENT_TIMESTAMP</p></td>
+</tr>
+<tr class="row-odd"><td><p>enrolled</p></td>
+<td><p>enum(‘0’,’1’,’2’,’3’,’4’)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>createdDate</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>CURRENT_TIMESTAMP</p></td>
+<td><p>DEFAULT_GENERATED</p></td>
 </tr>
 </tbody>
 </table>
@@ -311,30 +378,40 @@ CURRENT_TIMESTAMP</p></td>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>recordId
-studyId
-createdDate
-raw
-missingPermissions</p></td>
-<td><p>int
-varchar(17)
-datetime
-text
-text</p></td>
-<td><p>NO
-NO
-YES
-NO
-YES</p></td>
+<tr class="row-even"><td><p>recordId</p></td>
+<td><p>int</p></td>
+<td><p>NO</p></td>
 <td><p>PRI</p></td>
-<td><p>NULL
-NULL
-CURRENT_TIMESTAMP
-NULL
-NULL</p></td>
-<td><p>auto_increment</p>
-<p>DEFAULT_GENERATED</p>
-</td>
+<td><p>NULL</p></td>
+<td><p>auto_increment</p></td>
+</tr>
+<tr class="row-odd"><td><p>studyId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>createdDate</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>CURRENT_TIMESTAMP</p></td>
+<td><p>DEFAULT_GENERATED</p></td>
+</tr>
+<tr class="row-odd"><td><p>raw</p></td>
+<td><p>text</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>missingPermissions</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -352,56 +429,89 @@ NULL</p></td>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>recordId
-studyId
-device
-brand
-manufacturer
-model
-product
-releaseVersion
-sdkVersion
-deviceIdentifier
-createdDate
-deviceLocation</p></td>
-<td><p>int
-varchar(17)
-text
-text
-text
-text
-text
-text
-text
-varchar(16)
-timestamp
-text</p></td>
-<td><p>NO
-YES
-YES
-YES
-YES
-YES
-YES
-YES
-YES
-YES
-YES
-YES</p></td>
+<tr class="row-even"><td><p>recordId</p></td>
+<td><p>int</p></td>
+<td><p>NO</p></td>
 <td><p>PRI</p></td>
-<td><p>NULL
-NULL
-NULL
-NULL
-NULL
-NULL
-NULL
-NULL
-NULL
-NULL
-NULL
-NULL</p></td>
+<td><p>NULL</p></td>
 <td><p>auto_increment</p></td>
+</tr>
+<tr class="row-odd"><td><p>studyId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>device</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>brand</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>manufacturer</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>model</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>product</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>releaseVersion</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sdkVersion</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>deviceIdentifier</p></td>
+<td><p>varchar(16)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>createdDate</p></td>
+<td><p>timestamp</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>deviceLocation</p></td>
+<td><p>text</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
