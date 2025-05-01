@@ -1,8 +1,8 @@
 Setup
 =====
 
-**Requirements:**
------------------
+Requirements
+------------
 
 - OS Packages
 
@@ -34,8 +34,8 @@ Setup
     - SQLAlchemy 2.0.36
     - twilio 9.3.7
 
-**Steps:**
-----------
+Steps
+-----
 
 1. Confirm the OS packages listed above are installed and are working.
 
