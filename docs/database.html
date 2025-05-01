@@ -48,6 +48,18 @@
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Database Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#qualtrics-test-database">qualtrics_test Database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#user-table">user_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notified-users">notified_users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#survey-table">survey_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enrolled-table">enrolled_table</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#aware-test-database">aware_test Database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#health-check">health_check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phone-info">phone_info</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Common Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
@@ -80,15 +92,320 @@
              
   <section id="database-schema">
 <h1>Database Schema<a class="headerlink" href="#database-schema" title="Link to this heading"></a></h1>
-<p><strong>Database:</strong> <cite>flask_app_db</cite></p>
-<p><strong>Tables:</strong>
-- <cite>users</cite>: Stores user information
-- <cite>orders</cite>: Transaction details
-- <cite>notifications</cite>: Sent messages and delivery statuses</p>
-<p>Relationships:
-- One-to-many between <cite>users</cite> and <cite>orders</cite>
-- One-to-many between <cite>users</cite> and <cite>notifications</cite></p>
-<p>Refer to <cite>models.py</cite> for ORM definitions.</p>
+</section>
+<section id="qualtrics-test-database">
+<h1>qualtrics_test Database<a class="headerlink" href="#qualtrics-test-database" title="Link to this heading"></a></h1>
+<section id="user-table">
+<h2>user_table<a class="headerlink" href="#user-table" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Null</p></th>
+<th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Extra</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>recordId
+studyId
+createdDate
+phone
+email
+completedDate
+contactPref
+timezone
+phoneId</p></td>
+<td><p>int
+varchar(17)
+datetime
+varchar(10)
+text
+datetime
+enum(‘sms’,’email’,’both’)
+enum(‘EST’,’MST’,’PST’,’CST’,’AKST’,’HST’)
+varchar(16)</p></td>
+<td><p>NO
+NO
+YES
+NO
+NO
+NO
+NO
+NO
+YES</p></td>
+<td><p>PRI</p></td>
+<td><p>NULL
+NULL
+CURRENT_TIMESTAMP
+NULL
+NULL
+CURRENT_TIMESTAMP
+sms
+EST
+NULL</p></td>
+<td><p>auto_increment</p>
+<p>DEFAULT_GENERATED</p>
+<p>DEFAULT_GENERATED</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notified-users">
+<h2>notified_users<a class="headerlink" href="#notified-users" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Null</p></th>
+<th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Extra</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>recordId
+studyId
+notificationType
+createdDate
+messageSID
+messageType
+messageStatus
+statusUpdateTime</p></td>
+<td><p>int
+varchar(17)
+enum(‘daily’,’monthly’,’reminder’,’missed-aware’,’missed-survey’,’baseline’,’welcome’,’register’,’none’)
+datetime
+text
+enum(‘sms’,’email’)
+text
+datetime</p></td>
+<td><p>NO
+YES
+YES
+YES
+YES
+YES
+YES
+YES</p></td>
+<td><p>PRI</p></td>
+<td><p>NULL
+NULL
+NULL
+CURRENT_TIMESTAMP
+NULL
+NULL
+NULL
+NULL</p></td>
+<td><p>auto_increment</p>
+<p>DEFAULT_GENERATED</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="survey-table">
+<h2>survey_table<a class="headerlink" href="#survey-table" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Null</p></th>
+<th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Extra</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>recordId
+studyId
+responseId
+completedDate
+weekday
+type
+surveyDate</p></td>
+<td><p>int
+varchar(17)
+varchar(17)
+datetime
+enum(‘monday’,’tuesday’,’wednesday’,’thursday’,’friday’,’saturday’,’sunday’)
+enum(‘consent’,’baseline’,’daily’,’weekly’,’monthly’)
+date</p></td>
+<td><p>NO
+NO
+YES
+YES
+YES
+YES
+YES</p></td>
+<td><p>PRI</p></td>
+<td><p>NULL
+NULL
+NULL
+NULL
+NULL
+NULL
+NULL</p></td>
+<td><p>auto_increment</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="enrolled-table">
+<h2>enrolled_table<a class="headerlink" href="#enrolled-table" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Null</p></th>
+<th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Extra</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>recordId
+studyId
+updatedDate
+enrolled
+createdDate</p></td>
+<td><p>int
+varchar(17)
+datetime
+enum(‘0’,’1’,’2’,’3’,’4’)
+datetime</p></td>
+<td><p>NO
+NO
+YES
+NO
+YES</p></td>
+<td><p>PRI</p></td>
+<td><p>NULL
+NULL
+CURRENT_TIMESTAMP
+NULL
+CURRENT_TIMESTAMP</p></td>
+<td><p>auto_increment</p>
+<p>DEFAULT_GENERATED on update CURRENT_TIMESTAMP</p>
+<p>DEFAULT_GENERATED</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="aware-test-database">
+<h1>aware_test Database<a class="headerlink" href="#aware-test-database" title="Link to this heading"></a></h1>
+<section id="health-check">
+<h2>health_check<a class="headerlink" href="#health-check" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Null</p></th>
+<th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Extra</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>recordId
+studyId
+createdDate
+raw
+missingPermissions</p></td>
+<td><p>int
+varchar(17)
+datetime
+text
+text</p></td>
+<td><p>NO
+NO
+YES
+NO
+YES</p></td>
+<td><p>PRI</p></td>
+<td><p>NULL
+NULL
+CURRENT_TIMESTAMP
+NULL
+NULL</p></td>
+<td><p>auto_increment</p>
+<p>DEFAULT_GENERATED</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phone-info">
+<h2>phone_info<a class="headerlink" href="#phone-info" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Null</p></th>
+<th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Extra</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>recordId
+studyId
+device
+brand
+manufacturer
+model
+product
+releaseVersion
+sdkVersion
+deviceIdentifier
+createdDate
+deviceLocation</p></td>
+<td><p>int
+varchar(17)
+text
+text
+text
+text
+text
+text
+text
+varchar(16)
+timestamp
+text</p></td>
+<td><p>NO
+YES
+YES
+YES
+YES
+YES
+YES
+YES
+YES
+YES
+YES
+YES</p></td>
+<td><p>PRI</p></td>
+<td><p>NULL
+NULL
+NULL
+NULL
+NULL
+NULL
+NULL
+NULL
+NULL
+NULL
+NULL
+NULL</p></td>
+<td><p>auto_increment</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 

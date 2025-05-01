@@ -41,7 +41,7 @@ Steps
 
 1. Confirm the OS packages listed above are installed and are working.
 
-2. Create virtual environment:
+2. Create virtual environment.
 
     .. code-block:: bash
 
@@ -49,7 +49,7 @@ Steps
       source <environment_name>/bin/activate
       <environment_name>/bin/python -m pip install -r <optional_path>/requirements.txt
 
-3. Clone the repository:
+3. Clone the repository.
 
     .. code-block:: bash
 
@@ -57,14 +57,16 @@ Steps
       cd digital-phenotyping-server
       git checkout dev
 
-4. Create services for each of the servers:
+4. Run the servers.
+
+    #. Create services for each of the servers
 
     .. code-block:: bash
 
         cd /etc/systemd/system/
         sudo nano <server_name>.service
     
-    * Copy the following code inside the file:
+    #. Copy the following code inside the file.
 
         .. code-block:: bash
 
@@ -81,7 +83,7 @@ Steps
             [Install]
             WantedBy=multi-user.target
     
-    * Once all the required service files have been created
+    #. Once all the required service files have been created.
 
         .. code-block:: bash
 
@@ -90,7 +92,7 @@ Steps
             sudo systemctl status <server_name> # To check the status of the server
             sudo systemctl restart <server_name> # To deploy any changes made to the server
     
-    * Logs are captured in the logs directory inside each server's directory. To view all logs or crashes use the following command
+    #. Logs are captured in the logs directory inside each server's directory. To view all logs or crashes use the following command.
 
         .. code-block:: bash
             
