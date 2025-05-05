@@ -245,12 +245,12 @@ Check Enrolled Status
 AWARE Server
 ----------------
 
-**Server URL:** `aware`
+**Server URL:** ``aware``
 
 **Endpoints:**
 
-Register New User
-~~~~~~~~~~~~~~~~~
+Initial Health Signal
+~~~~~~~~~~~~~~~~~~~~~
 
 - **URL**: ``health/check``
 - **Method**: ``POST``
@@ -267,8 +267,8 @@ Register New User
             }
         }
 
-Register New User
-~~~~~~~~~~~~~~~~~
+Periodic Health Signal
+~~~~~~~~~~~~~~~~~~~~~~
 
 - **URL**: ``health/check/update``
 - **Method**: ``POST``

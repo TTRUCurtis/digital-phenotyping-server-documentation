@@ -70,16 +70,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#aware-server">AWARE Server</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Register New User</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Register New User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initial-health-signal">Initial Health Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#periodic-health-signal">Periodic Health Signal</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#twilio-server">Twilio Server</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">Register New User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Register New User</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#send-baseline-survey">Send Baseline Survey</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#send-daily-survey">Send Daily Survey</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#send-followup-survey">Send Followup Survey</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Send Daily Survey Reminder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Send Daily Survey Reminder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#send-missed-aware-survey-notification">Send Missed AWARE/Survey Notification</a></li>
 </ul>
 </li>
@@ -395,10 +395,10 @@
 </section>
 <section id="aware-server">
 <h2>AWARE Server<a class="headerlink" href="#aware-server" title="Link to this heading"></a></h2>
-<p><strong>Server URL:</strong> <cite>aware</cite></p>
+<p><strong>Server URL:</strong> <code class="docutils literal notranslate"><span class="pre">aware</span></code></p>
 <p><strong>Endpoints:</strong></p>
-<section id="id1">
-<h3>Register New User<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<section id="initial-health-signal">
+<h3>Initial Health Signal<a class="headerlink" href="#initial-health-signal" title="Link to this heading"></a></h3>
 <ul>
 <li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">health/check</span></code></p></li>
 <li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
@@ -418,8 +418,8 @@
 </li>
 </ul>
 </section>
-<section id="id2">
-<h3>Register New User<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<section id="periodic-health-signal">
+<h3>Periodic Health Signal<a class="headerlink" href="#periodic-health-signal" title="Link to this heading"></a></h3>
 <ul>
 <li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">health/check/update</span></code></p></li>
 <li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
@@ -443,8 +443,8 @@
 <h2>Twilio Server<a class="headerlink" href="#twilio-server" title="Link to this heading"></a></h2>
 <p><strong>Server URL:</strong> <code class="docutils literal notranslate"><span class="pre">twilio</span></code></p>
 <p><strong>Endpoints:</strong></p>
-<section id="id3">
-<h3>Register New User<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="id1">
+<h3>Register New User<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <ul>
 <li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">notify/register-user</span></code></p></li>
 <li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
@@ -519,8 +519,8 @@
 </li>
 </ul>
 </section>
-<section id="id4">
-<h3>Send Daily Survey Reminder<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id2">
+<h3>Send Daily Survey Reminder<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <ul>
 <li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">notify/reminder-night</span></code></p></li>
 <li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
