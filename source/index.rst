@@ -16,10 +16,9 @@ documentation for details.
 
    overview
    setup
-   deployment
    database
+   logging
    api
    troubleshooting
-   logging
    contributing
 

@@ -46,7 +46,6 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Common Problems</a></li>
@@ -82,13 +81,13 @@
 <h1>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h1>
 <p>Logs are stored at:</p>
 <ul class="simple">
-<li><p><strong>Access logs:</strong> <cite>/var/log/flask-server/access.log</cite></p></li>
-<li><p><strong>Error logs:</strong> <cite>/var/log/flask-server/error.log</cite></p></li>
+<li><p><strong>Qualtrics logs:</strong> <cite>{user}/digital-phenotyping-server/qualtrics-server/logs/qualtrics.log</cite></p></li>
+<li><p><strong>AWARE logs:</strong> <cite>{user}/digital-phenotyping-server/aware-server/logs/aware.log</cite></p></li>
+<li><p><strong>Twilio logs:</strong> <cite>{user}/digital-phenotyping-server/twilio-server/logs/twilio.log</cite></p></li>
+<li><p><strong>Nginx Access logs:</strong> <cite>/var/log/nginx/access.log</cite></p></li>
+<li><p><strong>Nginx Error logs:</strong> <cite>/var/log/nginx/error.log</cite></p></li>
 </ul>
-<p>Make sure the logs directory is writable by the Flask/Gunicorn process:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/log/flask-server/
-</pre></div>
-</div>
+<p>The logs file for the server is rotated daily at 8 AM. With the earilier log file being appended with the date (e.g. <cite>qualtrics.log.2025-04-20</cite>)</p>
 </section>
 
 

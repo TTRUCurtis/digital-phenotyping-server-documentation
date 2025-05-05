@@ -57,16 +57,14 @@ Steps
       cd digital-phenotyping-server
       git checkout dev
 
-4. Run the servers.
-
-    #. Create services for each of the servers
+4. Create services for each of the servers
 
     .. code-block:: bash
 
         cd /etc/systemd/system/
         sudo nano <server_name>.service
     
-    #. Copy the following code inside the file.
+5. Copy the following code inside each file.
 
     .. code-block:: bash
 
@@ -83,7 +81,7 @@ Steps
         [Install]
         WantedBy=multi-user.target
     
-    #. Once all the required service files have been created.
+6. Once all the required service files have been created.
 
     .. code-block:: bash
 
@@ -92,13 +90,13 @@ Steps
         sudo systemctl status <server_name> # To check the status of the server
         sudo systemctl restart <server_name> # To deploy any changes made to the server
     
-    #. Logs are captured in the logs directory inside each server's directory. To view all logs or crashes use the following command.
+7. Logs are captured in the logs directory inside each server's directory. To view all logs or crashes use the following command.
 
     .. code-block:: bash
         
         journalctl -u <server_name>.service -n <optional_number_of_lines>
 
-6. In Nginx create a proxy pass for each of the server's port_number. Below is a sample proxy pass. For a better guide on this please refer to `Configuring HTTPS Servers in NGINX <https://nginx.org/en/docs/http/configuring_https_servers.html>`_
+8. In Nginx create a proxy pass for each of the server's port_number. Below is a sample proxy pass. For a better guide on this please refer to `Configuring HTTPS Servers in NGINX <https://nginx.org/en/docs/http/configuring_https_servers.html>`_
 
     .. code-block:: bash
 

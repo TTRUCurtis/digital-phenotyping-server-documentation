@@ -19,8 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Reference" href="api.html" />
-    <link rel="prev" title="Deployment" href="deployment.html" /> 
+    <link rel="next" title="API Reference" href="api.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,18 +45,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Database Schema</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#qualtrics-test-database">qualtrics_test Database</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#user-table">user_table</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#notified-users">notified_users</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#survey-table">survey_table</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enrolled-table">enrolled_table</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Database Schema</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#qualtrics-test-database">qualtrics_test Database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#user-table">user_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#survey-table">survey_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enrolled-table">enrolled_table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notified-users">notified_users</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#aware-test-database">aware_test Database</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#health-check">health_check</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#phone-info">phone_info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#aware-test-database">aware_test Database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#health-check">health_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phone-info">phone_info</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
@@ -92,11 +92,10 @@
              
   <section id="database-schema">
 <h1>Database Schema<a class="headerlink" href="#database-schema" title="Link to this heading"></a></h1>
-</section>
 <section id="qualtrics-test-database">
-<h1>qualtrics_test Database<a class="headerlink" href="#qualtrics-test-database" title="Link to this heading"></a></h1>
+<h2>qualtrics_test Database<a class="headerlink" href="#qualtrics-test-database" title="Link to this heading"></a></h2>
 <section id="user-table">
-<h2>user_table<a class="headerlink" href="#user-table" title="Link to this heading"></a></h2>
+<h3>user_table<a class="headerlink" href="#user-table" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
@@ -174,8 +173,124 @@
 </tbody>
 </table>
 </section>
+<section id="survey-table">
+<h3>survey_table<a class="headerlink" href="#survey-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Null</p></th>
+<th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Extra</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>recordId</p></td>
+<td><p>int</p></td>
+<td><p>NO</p></td>
+<td><p>PRI</p></td>
+<td><p>NULL</p></td>
+<td><p>auto_increment</p></td>
+</tr>
+<tr class="row-odd"><td><p>studyId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>responseId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>completedDate</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>weekday</p></td>
+<td><p>enum(‘monday’,’tuesday’,’wednesday’,’thursday’,’friday’,’saturday’,’sunday’)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p>enum(‘consent’,’baseline’,’daily’,’weekly’,’monthly’)</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>surveyDate</p></td>
+<td><p>date</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="enrolled-table">
+<h3>enrolled_table<a class="headerlink" href="#enrolled-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Null</p></th>
+<th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Extra</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>recordId</p></td>
+<td><p>int</p></td>
+<td><p>NO</p></td>
+<td><p>PRI</p></td>
+<td><p>NULL</p></td>
+<td><p>auto_increment</p></td>
+</tr>
+<tr class="row-odd"><td><p>studyId</p></td>
+<td><p>varchar(17)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>updatedDate</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>CURRENT_TIMESTAMP</p></td>
+<td><p>DEFAULT_GENERATED on update CURRENT_TIMESTAMP</p></td>
+</tr>
+<tr class="row-odd"><td><p>enrolled</p></td>
+<td><p>enum(‘0’,’1’,’2’,’3’,’4’)</p></td>
+<td><p>NO</p></td>
+<td></td>
+<td><p>NULL</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>createdDate</p></td>
+<td><p>datetime</p></td>
+<td><p>YES</p></td>
+<td></td>
+<td><p>CURRENT_TIMESTAMP</p></td>
+<td><p>DEFAULT_GENERATED</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="notified-users">
-<h2>notified_users<a class="headerlink" href="#notified-users" title="Link to this heading"></a></h2>
+<h3>notified_users<a class="headerlink" href="#notified-users" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
@@ -246,127 +361,11 @@
 </tbody>
 </table>
 </section>
-<section id="survey-table">
-<h2>survey_table<a class="headerlink" href="#survey-table" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Field</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Null</p></th>
-<th class="head"><p>Key</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Extra</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>recordId</p></td>
-<td><p>int</p></td>
-<td><p>NO</p></td>
-<td><p>PRI</p></td>
-<td><p>NULL</p></td>
-<td><p>auto_increment</p></td>
-</tr>
-<tr class="row-odd"><td><p>studyId</p></td>
-<td><p>varchar(17)</p></td>
-<td><p>NO</p></td>
-<td></td>
-<td><p>NULL</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>responseId</p></td>
-<td><p>varchar(17)</p></td>
-<td><p>YES</p></td>
-<td></td>
-<td><p>NULL</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>completedDate</p></td>
-<td><p>datetime</p></td>
-<td><p>YES</p></td>
-<td></td>
-<td><p>NULL</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>weekday</p></td>
-<td><p>enum(‘monday’,’tuesday’,’wednesday’,’thursday’,’friday’,’saturday’,’sunday’)</p></td>
-<td><p>YES</p></td>
-<td></td>
-<td><p>NULL</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>type</p></td>
-<td><p>enum(‘consent’,’baseline’,’daily’,’weekly’,’monthly’)</p></td>
-<td><p>YES</p></td>
-<td></td>
-<td><p>NULL</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>surveyDate</p></td>
-<td><p>date</p></td>
-<td><p>YES</p></td>
-<td></td>
-<td><p>NULL</p></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="enrolled-table">
-<h2>enrolled_table<a class="headerlink" href="#enrolled-table" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Field</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Null</p></th>
-<th class="head"><p>Key</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Extra</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>recordId</p></td>
-<td><p>int</p></td>
-<td><p>NO</p></td>
-<td><p>PRI</p></td>
-<td><p>NULL</p></td>
-<td><p>auto_increment</p></td>
-</tr>
-<tr class="row-odd"><td><p>studyId</p></td>
-<td><p>varchar(17)</p></td>
-<td><p>NO</p></td>
-<td></td>
-<td><p>NULL</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>updatedDate</p></td>
-<td><p>datetime</p></td>
-<td><p>YES</p></td>
-<td></td>
-<td><p>CURRENT_TIMESTAMP</p></td>
-<td><p>DEFAULT_GENERATED on update CURRENT_TIMESTAMP</p></td>
-</tr>
-<tr class="row-odd"><td><p>enrolled</p></td>
-<td><p>enum(‘0’,’1’,’2’,’3’,’4’)</p></td>
-<td><p>NO</p></td>
-<td></td>
-<td><p>NULL</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>createdDate</p></td>
-<td><p>datetime</p></td>
-<td><p>YES</p></td>
-<td></td>
-<td><p>CURRENT_TIMESTAMP</p></td>
-<td><p>DEFAULT_GENERATED</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 </section>
 <section id="aware-test-database">
-<h1>aware_test Database<a class="headerlink" href="#aware-test-database" title="Link to this heading"></a></h1>
+<h2>aware_test Database<a class="headerlink" href="#aware-test-database" title="Link to this heading"></a></h2>
 <section id="health-check">
-<h2>health_check<a class="headerlink" href="#health-check" title="Link to this heading"></a></h2>
+<h3>health_check<a class="headerlink" href="#health-check" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
@@ -417,7 +416,7 @@
 </table>
 </section>
 <section id="phone-info">
-<h2>phone_info<a class="headerlink" href="#phone-info" title="Link to this heading"></a></h2>
+<h3>phone_info<a class="headerlink" href="#phone-info" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
@@ -517,12 +516,12 @@
 </table>
 </section>
 </section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="deployment.html" class="btn btn-neutral float-left" title="Deployment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

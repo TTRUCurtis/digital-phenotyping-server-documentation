@@ -152,19 +152,17 @@ git<span class="w"> </span>checkout<span class="w"> </span>dev
 </div>
 </div></blockquote>
 </li>
-<li><p>Run the servers.</p>
+<li><p>Create services for each of the servers</p>
 <blockquote>
-<div><ol class="arabic simple">
-<li><p>Create services for each of the servers</p></li>
-</ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/systemd/system/
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/systemd/system/
 sudo<span class="w"> </span>nano<span class="w"> </span>&lt;server_name&gt;.service
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li><p>Copy the following code inside the file.</p></li>
-</ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
+</div></blockquote>
+</li>
+<li><p>Copy the following code inside each file.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
 <span class="nv">Description</span><span class="o">=</span>Gunicorn<span class="w"> </span>instance<span class="w"> </span>to<span class="w"> </span>serve<span class="w"> </span>&lt;server_name&gt;<span class="w"> </span>flask<span class="w"> </span>app
 <span class="nv">After</span><span class="o">=</span>network.target
 
@@ -178,25 +176,25 @@ sudo<span class="w"> </span>nano<span class="w"> </span>&lt;server_name&gt;.serv
 <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li><p>Once all the required service files have been created.</p></li>
-</ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</div></blockquote>
+</li>
+<li><p>Once all the required service files have been created.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
 sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>&lt;server_name&gt;<span class="w"> </span><span class="c1"># To start the server</span>
 sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>&lt;server_name&gt;<span class="w"> </span><span class="c1"># To check the status of the server</span>
 sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>&lt;server_name&gt;<span class="w"> </span><span class="c1"># To deploy any changes made to the server</span>
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li><p>Logs are captured in the logs directory inside each server’s directory. To view all logs or crashes use the following command.</p></li>
-</ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>journalctl<span class="w"> </span>-u<span class="w"> </span>&lt;server_name&gt;.service<span class="w"> </span>-n<span class="w"> </span>&lt;optional_number_of_lines&gt;
+</div></blockquote>
+</li>
+<li><p>Logs are captured in the logs directory inside each server’s directory. To view all logs or crashes use the following command.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>journalctl<span class="w"> </span>-u<span class="w"> </span>&lt;server_name&gt;.service<span class="w"> </span>-n<span class="w"> </span>&lt;optional_number_of_lines&gt;
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-</ol>
-<ol class="arabic" start="6">
 <li><p>In Nginx create a proxy pass for each of the server’s port_number. Below is a sample proxy pass. For a better guide on this please refer to <a class="reference external" href="https://nginx.org/en/docs/http/configuring_https_servers.html">Configuring HTTPS Servers in NGINX</a></p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...

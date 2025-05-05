@@ -3,11 +3,10 @@ Logging
 
 Logs are stored at:
 
-- **Access logs:** `/var/log/flask-server/access.log`
-- **Error logs:** `/var/log/flask-server/error.log`
+- **Qualtrics logs:** `{user}/digital-phenotyping-server/qualtrics-server/logs/qualtrics.log`
+- **AWARE logs:** `{user}/digital-phenotyping-server/aware-server/logs/aware.log`
+- **Twilio logs:** `{user}/digital-phenotyping-server/twilio-server/logs/twilio.log`
+- **Nginx Access logs:** `/var/log/nginx/access.log`
+- **Nginx Error logs:** `/var/log/nginx/error.log`
 
-Make sure the logs directory is writable by the Flask/Gunicorn process:
-
-.. code-block:: bash
-
-   sudo chown -R www-data:www-data /var/log/flask-server/
+The logs file for the server is rotated daily at 8 AM. With the earilier log file being appended with the date (e.g. `qualtrics.log.2025-04-20`)

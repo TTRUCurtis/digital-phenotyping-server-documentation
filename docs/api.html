@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Common Problems" href="troubleshooting.html" />
-    <link rel="prev" title="Database Schema" href="database.html" /> 
+    <link rel="prev" title="Logging" href="logging.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,11 +46,46 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Common Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#qualtrics-server">Qualtrics Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#register-new-user">Register New User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quit-user">Quit User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-participant-phone-id">Update Participant Phone ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-participant-s-enrolled-status">Check Participant’s Enrolled Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-participant-s-duplicate-info">Check Participant’s Duplicate Info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schedule-daily-survey">Schedule Daily Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#baseline-completed">Baseline Completed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validate-daily-survey-link">Validate Daily Survey Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#daily-survey-completed">Daily Survey Completed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validate-monthly-survey-link">Validate Monthly Survey Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#monthly-survey-completed">Monthly Survey Completed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-daily-survey-reminder">Send Daily Survey Reminder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-missed-survey-aware-notification">Send Missed Survey/AWARE Notification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upload-status-report">Upload Status Report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-sms-notification-status">Update SMS Notification Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-email-notification-status">Update Email Notification Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-enrolled-status">Check Enrolled Status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#aware-server">AWARE Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Register New User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Register New User</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#twilio-server">Twilio Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Register New User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-baseline-survey">Send Baseline Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-daily-survey">Send Daily Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-followup-survey">Send Followup Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Send Daily Survey Reminder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-missed-aware-survey-notification">Send Missed AWARE/Survey Notification</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Common Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 
@@ -80,21 +115,458 @@
              
   <section id="api-reference">
 <h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
-<p><strong>Base URL:</strong> <cite>/api/v1/</cite></p>
+<p><strong>Base URL:</strong> <code class="docutils literal notranslate"><span class="pre">https://ttru-smg.wwbp.org</span></code></p>
+<p>To make a request to the specific endpoint, use the format: <code class="docutils literal notranslate"><span class="pre">&lt;BASE_URL&gt;/&lt;SERVER_URL&gt;/&lt;ENDPOINT_URL&gt;</span></code></p>
+<section id="qualtrics-server">
+<h2>Qualtrics Server<a class="headerlink" href="#qualtrics-server" title="Link to this heading"></a></h2>
+<p><strong>Server URL:</strong> <code class="docutils literal notranslate"><span class="pre">qualtrics</span></code></p>
 <p><strong>Endpoints:</strong></p>
-<ul class="simple">
-<li><p><cite>/users/</cite> - <cite>GET</cite>, <cite>POST</cite></p></li>
-<li><p><cite>/orders/</cite> - <cite>GET</cite>, <cite>POST</cite>, <cite>DELETE</cite></p></li>
-<li><p><cite>/notifications/</cite> - <cite>GET</cite>, <cite>POST</cite></p></li>
+<section id="register-new-user">
+<h3>Register New User<a class="headerlink" href="#register-new-user" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">registration/new-user</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Request participant survey responses from Qualtrics, store them in <cite>user_table</cite> and send <cite>AWARE Download Text</cite> to participant.</p></li>
+<li><p><strong>Query Parameters</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studyId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s unique ID.</span>
+<span class="n">limit</span><span class="p">:</span> <span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">users</span> <span class="n">to</span> <span class="k">return</span> <span class="n">per</span> <span class="n">page</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
 </ul>
-<p>Refer to <cite>routes.py</cite> for full request/response details.</p>
+</section>
+<section id="quit-user">
+<h3>Quit User<a class="headerlink" href="#quit-user" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">registration/quit-user</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Participant request to leave the study.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;studyId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="update-participant-phone-id">
+<h3>Update Participant Phone ID<a class="headerlink" href="#update-participant-phone-id" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">registration/add-phoneId</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Update participant’s phoneId in <code class="docutils literal notranslate"><span class="pre">user_table</span></code> after registering for a study inside AWARE app.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;studyId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;phoneId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;PHONE_ID&gt;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="check-participant-s-enrolled-status">
+<h3>Check Participant’s Enrolled Status<a class="headerlink" href="#check-participant-s-enrolled-status" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">registration/check-user</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Check and return participant’s enrolled status if exists.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;studyId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="check-participant-s-duplicate-info">
+<h3>Check Participant’s Duplicate Info<a class="headerlink" href="#check-participant-s-duplicate-info" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">__duplicateInfo</span></code></p></li>
+<li><p><strong>Description</strong>: Checks if new participant’s phone, email and/or phoneId already exist in the <code class="docutils literal notranslate"><span class="pre">user_table</span></code>.</p></li>
+<li><p><strong>Method Parameters</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">userInfo</span><span class="p">:</span> <span class="n">UserTable</span> <span class="c1"># User Table object with participant info</span>
+<span class="n">phoneId</span><span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="kc">None</span> <span class="c1"># New phoneId to be added</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="schedule-daily-survey">
+<h3>Schedule Daily Survey<a class="headerlink" href="#schedule-daily-survey" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">__dailySurveyReminder</span></code></p></li>
+<li><p><strong>Description</strong>: CRON triggered method at 3 PM EST to schedule daily survey notification for enrolled participants. If participant is on day number 30/60, sends out followup notification instead of daily survey.</p></li>
+<li><p><strong>Method Parameters</strong>: None</p></li>
+</ul>
+</section>
+<section id="baseline-completed">
+<h3>Baseline Completed<a class="headerlink" href="#baseline-completed" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">survey/baseline</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Qualtrics pings endpoint after baseline survey completion. Info added to <code class="docutils literal notranslate"><span class="pre">survey_table</span></code>.</p></li>
+<li><p><strong>Query Parameters</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studyId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s unique ID.</span>
+<span class="n">responseId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s survey unique code.</span>
+<span class="n">surveyDate</span><span class="p">:</span> <span class="n">Date</span> <span class="n">when</span> <span class="n">baseline</span> <span class="n">survey</span> <span class="n">was</span> <span class="n">sent</span><span class="o">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="validate-daily-survey-link">
+<h3>Validate Daily Survey Link<a class="headerlink" href="#validate-daily-survey-link" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">survey/daily-survey-validate</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code></p></li>
+<li><p><strong>Description</strong>: Server checks participant’s enrolled status, timezone and time-window to redirect them to Qualtrics daily survey page for that day or redirect them to survey missed page.</p></li>
+<li><p><strong>Query Parameters</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studyId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s unique ID.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="daily-survey-completed">
+<h3>Daily Survey Completed<a class="headerlink" href="#daily-survey-completed" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">survey/daily</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Qualtrics pings endpoint after daily survey completion. Info added to <code class="docutils literal notranslate"><span class="pre">survey_table</span></code>.</p></li>
+<li><p><strong>Query Parameters</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studyId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s unique ID.</span>
+<span class="n">responseId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s survey unique code.</span>
+<span class="n">surveyDate</span><span class="p">:</span> <span class="n">Date</span> <span class="n">when</span> <span class="n">daily</span> <span class="n">survey</span> <span class="n">was</span> <span class="n">sent</span><span class="o">.</span>
+<span class="n">weekday</span><span class="p">:</span> <span class="n">Day</span> <span class="n">of</span> <span class="n">the</span> <span class="n">week</span><span class="o">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="validate-monthly-survey-link">
+<h3>Validate Monthly Survey Link<a class="headerlink" href="#validate-monthly-survey-link" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">survey/followup-survey-validate</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code></p></li>
+<li><p><strong>Description</strong>: Server checks participant’s enrolled status, timezone and time-window to redirect them to Qualtrics followup survey page for that day or redirect them to survey missed page.</p></li>
+<li><p><strong>Query Parameters</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studyId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s unique ID.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="monthly-survey-completed">
+<h3>Monthly Survey Completed<a class="headerlink" href="#monthly-survey-completed" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">survey/monthly</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Qualtrics pings endpoint after followup survey completion. Info added to <code class="docutils literal notranslate"><span class="pre">survey_table</span></code>.</p></li>
+<li><p><strong>Query Parameters</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studyId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s unique ID.</span>
+<span class="n">responseId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s survey unique code.</span>
+<span class="n">surveyDate</span><span class="p">:</span> <span class="n">Date</span> <span class="n">when</span> <span class="n">daily</span> <span class="n">survey</span> <span class="n">was</span> <span class="n">sent</span><span class="o">.</span>
+<span class="n">day_number</span><span class="p">:</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">days</span> <span class="n">since</span> <span class="n">enrolled</span> <span class="p">(</span><span class="n">baseline</span> <span class="n">survey</span> <span class="n">completed</span> <span class="n">date</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="send-daily-survey-reminder">
+<h3>Send Daily Survey Reminder<a class="headerlink" href="#send-daily-survey-reminder" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">reminderNight</span></code></p></li>
+<li><p><strong>Description</strong>: Checks participant’s who have not completed current days survey, then sends them a reminder notification to complete the survey at 9 PM local to their timezone. Only sends reminder for daily surveys.</p></li>
+<li><p><strong>Method Parameters</strong>: None</p></li>
+</ul>
+</section>
+<section id="send-missed-survey-aware-notification">
+<h3>Send Missed Survey/AWARE Notification<a class="headerlink" href="#send-missed-survey-aware-notification" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">reminder/</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: TTRU-AWARE server triggers endpoint daily morning (around 10 AM) with participant studyIDs and whether they missed completing daily survey and/or AWARE data. Sends notification to participant to keep being active in the study.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;ROW_NUMBER&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;study_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;AWARE&quot;</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">missed</span> <span class="k">else</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;survey&quot;</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">missed</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="upload-status-report">
+<h3>Upload Status Report<a class="headerlink" href="#upload-status-report" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">__upload_person_level_stats</span></code></p></li>
+<li><p><strong>Description</strong>: Generates a report of each enrolled participant for the previous day. This method is triggered automatically when <code class="docutils literal notranslate"><span class="pre">Send</span> <span class="pre">Missed</span> <span class="pre">Survey/AWARE</span> <span class="pre">Notification</span></code> method is triggered.</p></li>
+<li><p><strong>Method Parameters</strong>: None</p></li>
+</ul>
+</section>
+<section id="update-sms-notification-status">
+<h3>Update SMS Notification Status<a class="headerlink" href="#update-sms-notification-status" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">message/sms-status-check</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Twilio triggers endpoint which is specified as a status callback URL when SMS is attempted. Contains participant info and message SID to update or add record of final status of the attempted SMS notification.</p></li>
+<li><p><strong>Query Parameters</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studyId</span><span class="p">:</span> <span class="n">Participant</span><span class="s1">&#39;s unique ID.</span>
+<span class="n">notification_type</span><span class="p">:</span> <span class="n">What</span> <span class="n">the</span> <span class="n">notification</span> <span class="n">was</span> <span class="k">for</span><span class="o">.</span>
+<span class="n">message_sid</span><span class="p">:</span> <span class="n">Message</span><span class="s1">&#39;s unique ID from Twilio.</span>
+<span class="n">message_status</span><span class="p">:</span> <span class="n">Message</span> <span class="n">status</span> <span class="n">whether</span> <span class="n">delivered</span> <span class="ow">or</span> <span class="n">error</span><span class="o">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="update-email-notification-status">
+<h3>Update Email Notification Status<a class="headerlink" href="#update-email-notification-status" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">message/sms-status-check</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Twilio triggers endpoint which is specified as a status callback URL when email is attempted. Contains participant info and message SID to update or add record of final status of attempted email notification.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;studyId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;notification&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;NOTIFICATION_TYPE&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sg_message_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;UNIQUE_MESSAGE_ID&gt;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;MESSAGE_STATUS&gt;&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="check-enrolled-status">
+<h3>Check Enrolled Status<a class="headerlink" href="#check-enrolled-status" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">admin/status-check-all</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Returns a JSON body of study IDs and their respective enrolled status and the status updated datetime as values.</p></li>
+<li><p><strong>Request Body</strong>: None</p></li>
+</ul>
+</section>
+</section>
+<section id="aware-server">
+<h2>AWARE Server<a class="headerlink" href="#aware-server" title="Link to this heading"></a></h2>
+<p><strong>Server URL:</strong> <cite>aware</cite></p>
+<p><strong>Endpoints:</strong></p>
+<section id="id1">
+<h3>Register New User<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">health/check</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Validates participant’s device info, enabled permissions, verifies if device was already used previously by another participant. If all checks are satisfied, logs participant info in <code class="docutils literal notranslate"><span class="pre">aware_test.health_check</span></code> table and triggers baseline survey notification to participant.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;device_info&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;JSON device specific information&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;permissions_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{JSON permission and boolean value if enabled or disabled}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;study_eligibility_info&quot;</span><span class="p">:</span> <span class="s2">&quot;{JSON with location, bluetooth flag and info about whether participant passed the AWARE app checks}&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h3>Register New User<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">health/check/update</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Validates participant’s enabled permissions and logs info in <code class="docutils literal notranslate"><span class="pre">aware_test.health_check</span></code> table. Serves as a way to check that participant has AWARE installed on their device. Each participant’s device sends a periodic health signal every 10 minutes.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;pid&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;permissions_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{JSON permission and boolean value if enabled or disabled}&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+<section id="twilio-server">
+<h2>Twilio Server<a class="headerlink" href="#twilio-server" title="Link to this heading"></a></h2>
+<p><strong>Server URL:</strong> <code class="docutils literal notranslate"><span class="pre">twilio</span></code></p>
+<p><strong>Endpoints:</strong></p>
+<section id="id3">
+<h3>Register New User<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">notify/register-user</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Attempts to send AWARE download SMS to participant’s phone number through Twilio.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;studyId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="send-baseline-survey">
+<h3>Send Baseline Survey<a class="headerlink" href="#send-baseline-survey" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">notify/baseline</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Attempts to send Welcome notification which contains info about onboarding and link to FAQs page, followed by Baseline survey notification after a 30 seconds delay to participant’s through Twilio.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;studyId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="send-daily-survey">
+<h3>Send Daily Survey<a class="headerlink" href="#send-daily-survey" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">notify/daily-survey</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Attempts to send notification with daily survey redirect link to participant at 5 PM local to their timezone. This method schedules notifications through Twilio.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;studyId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="send-followup-survey">
+<h3>Send Followup Survey<a class="headerlink" href="#send-followup-survey" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">notify/followup-survey</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Attempts to send notification with followup survey redirect link to participant at 5 PM local to their timezone. This method schedules notifications through Twilio.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;studyId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h3>Send Daily Survey Reminder<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">notify/reminder-night</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Attempts to send a notification reminding participants to complete the daily survey at 9 PM local to their timezone. This method schedules notifications through Twilio.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;studyId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="send-missed-aware-survey-notification">
+<h3>Send Missed AWARE/Survey Notification<a class="headerlink" href="#send-missed-aware-survey-notification" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">notify/reminder</span></code></p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>Description</strong>: Attempts to send a notification to participants to either keep AWARE active or complete daily surveys on time or both. This method triggers notifications through Twilio.</p></li>
+<li><p><strong>Request Body</strong>:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;studyId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;STUDY_ID&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;remind&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;aware|survey|both&gt;&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>Refer to <cite>routes.py</cite> for full request/response details in the specific directory.</p>
+</section>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="database.html" class="btn btn-neutral float-left" title="Database Schema" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="logging.html" class="btn btn-neutral float-left" title="Logging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Common Problems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
