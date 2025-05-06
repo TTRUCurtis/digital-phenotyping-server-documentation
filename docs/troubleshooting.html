@@ -83,11 +83,17 @@
 <li><p>SSH into the server and start MySQL shell or use a remote client to connect to the MySQL DB.</p></li>
 <li><p>Confirm the current status of the partipant.</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">studyId</span><span class="p">,</span><span class="w"> </span><span class="n">enrolled</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">qualtrics_test</span><span class="p">.</span><span class="n">enrolled_table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">studyId</span><span class="o">=</span><span class="s1">&#39;&lt;PARTICIPANT_STUDY_ID&gt;&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
 </li>
 <li><p>Unenroll the participant with the following query.</p>
 <blockquote>
-<div></div></blockquote>
+<div><div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">qualtrics_test</span><span class="p">.</span><span class="n">enrolled_table</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">enrolled</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">studyId</span><span class="o">=</span><span class="s1">&#39;&lt;PARTICIPANT_STUDY_ID&gt;&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
 </li>
 </ul>
 </li>
