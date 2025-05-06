@@ -48,7 +48,14 @@
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Common Problems</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Common Problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#unenroll-participants">Unenroll Participants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#send-re-send-aware-download-notification">Send/Re-send AWARE Download Notification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#check-notification-status-of-sent-message">Check Notification Status of Sent Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#participant-did-not-receive-baseline-survey-notification">Participant Did Not Receive Baseline Survey Notification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#participant-received-missed-aware-notification">Participant Received missed-aware Notification</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -77,43 +84,89 @@
              
   <section id="common-problems">
 <h1>Common Problems<a class="headerlink" href="#common-problems" title="Link to this heading"></a></h1>
-<ol class="arabic">
-<li><p><strong>Unenroll Participants</strong></p>
-<ul>
+<section id="unenroll-participants">
+<h2>Unenroll Participants<a class="headerlink" href="#unenroll-participants" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
 <li><p>SSH into the server and start MySQL shell or use a remote client to connect to the MySQL DB.</p></li>
-<li><p>Confirm the current status of the partipant.</p>
-<blockquote>
-<div><div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">studyId</span><span class="p">,</span><span class="w"> </span><span class="n">enrolled</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">qualtrics_test</span><span class="p">.</span><span class="n">enrolled_table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">studyId</span><span class="o">=</span><span class="s1">&#39;&lt;PARTICIPANT_STUDY_ID&gt;&#39;</span><span class="p">;</span>
+<li><p>Confirm the current status of the partipant.</p></li>
+</ul>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">studyId</span><span class="p">,</span><span class="w"> </span><span class="n">enrolled</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">qualtrics_test</span><span class="p">.</span><span class="n">enrolled_table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">studyId</span><span class="o">=</span><span class="s1">&#39;&lt;PARTICIPANT_STUDY_ID&gt;&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Unenroll the participant with the following query.</p></li>
+</ul>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">qualtrics_test</span><span class="p">.</span><span class="n">enrolled_table</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">enrolled</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">studyId</span><span class="o">=</span><span class="s1">&#39;&lt;PARTICIPANT_STUDY_ID&gt;&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </div></blockquote>
-</li>
-<li><p>Unenroll the participant with the following query.</p>
+</section>
+<section id="send-re-send-aware-download-notification">
+<h2>Send/Re-send AWARE Download Notification<a class="headerlink" href="#send-re-send-aware-download-notification" title="Link to this heading"></a></h2>
 <blockquote>
-<div><div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">qualtrics_test</span><span class="p">.</span><span class="n">enrolled_table</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">enrolled</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">studyId</span><span class="o">=</span><span class="s1">&#39;&lt;PARTICIPANT_STUDY_ID&gt;&#39;</span><span class="p">;</span>
+<div><ul class="simple">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">curl</span></code> command or use an API platform such as Postman.</p></li>
+<li><p><strong>Method</strong>: <code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>URL</strong>: <code class="docutils literal notranslate"><span class="pre">https://ttru-smg.wwbp.org/qualtrics/registration/new-user?studyId=&lt;PARTICIPANT_STUDY_ID&gt;</span></code></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="check-notification-status-of-sent-message">
+<h2>Check Notification Status of Sent Message<a class="headerlink" href="#check-notification-status-of-sent-message" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>SSH into the server and start MySQL shell or use a remote client to connect to the MySQL DB.</p></li>
+<li><p>Use the following query.</p></li>
+</ul>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">qualtrics_test</span><span class="p">.</span><span class="n">notified_users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">studyId</span><span class="o">=</span><span class="s1">&#39;&lt;PARTICIPANT_STUDY_ID&gt;&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="nb">DATE</span><span class="p">(</span><span class="n">createdDate</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;&lt;DATE&gt;&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
+<ul>
+<li><p>A few other filters can also be applied such as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">notificationType</span></code> which can be <code class="docutils literal notranslate"><span class="pre">['register',</span> <span class="pre">'baseline',</span> <span class="pre">'welcome',</span> <span class="pre">'daily',</span> <span class="pre">'monthly',</span> <span class="pre">'reminder',</span> <span class="pre">'missed-aware',</span> <span class="pre">'missed-survey']</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">messageType</span></code> which can be <code class="docutils literal notranslate"><span class="pre">['sms',</span> <span class="pre">'email']</span></code></p></li>
+</ul>
 </div></blockquote>
 </li>
 </ul>
-</li>
-<li><p><strong>Flask ImportError</strong></p>
-<ul class="simple">
-<li><p>Activate virtual environment</p></li>
-<li><p>Reinstall requirements</p></li>
+</div></blockquote>
+</section>
+<section id="participant-did-not-receive-baseline-survey-notification">
+<h2>Participant Did Not Receive Baseline Survey Notification<a class="headerlink" href="#participant-did-not-receive-baseline-survey-notification" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Participant has successfully completed the AWARE app study registration.</p></li>
+<li><p>Find the date of their initial health signal.</p></li>
 </ul>
-</li>
-<li><p><strong>500 Internal Server Errors</strong></p>
-<ul class="simple">
-<li><p>Check logs in <cite>/var/log/flask-server/error.log</cite></p></li>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">studyId</span><span class="p">,</span><span class="w"> </span><span class="k">MIN</span><span class="p">(</span><span class="nb">DATE</span><span class="p">(</span><span class="n">createdDate</span><span class="p">))</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">aware_test</span><span class="p">.</span><span class="n">health_check</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">studyId</span><span class="o">=</span><span class="s1">&#39;&lt;PARTICIPANT_STUDY_ID&gt;&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Check the AWARE server logs with the date from the above result.</p></li>
+<li><p>Common Issues to debug this are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Missing Permissions: Participant has not enabled all the required permissions most likely Bluetooth, which causes <code class="docutils literal notranslate"><span class="pre">study_eligibility_info</span></code> to contain the <code class="docutils literal notranslate"><span class="pre">failed</span></code> flag. Ask participant to re-install the app with all the required permissions enabled.</p></li>
+<li><p>Missing Study Eligibility Info: At times AWARE app is not sending the key <code class="docutils literal notranslate"><span class="pre">study_eligibility_info</span></code> along with the initial health signal. Ask participant to re-install AWARE app.</p></li>
 </ul>
+</div></blockquote>
 </li>
-<li><p><strong>Permission Denied on Logs</strong></p>
-<ul class="simple">
-<li><p>Make sure <cite>flask</cite> user has write access to log directory</p></li>
 </ul>
-</li>
-</ol>
+</div></blockquote>
+</section>
+<section id="participant-received-missed-aware-notification">
+<h2>Participant Received missed-aware Notification<a class="headerlink" href="#participant-received-missed-aware-notification" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Participant has reached out that AWARE is installed on their phone and they received <code class="docutils literal notranslate"><span class="pre">missed-aware</span></code> notification.</p></li>
+<li><p>Check the AWARE DB to see if participant’s study ID has any rows in the sensor tables in AWARE DB.</p></li>
+<li><p>Ask them to click the <code class="docutils literal notranslate"><span class="pre">Sync</span></code> button in AWARE app and keep WiFi ON.</p></li>
+</ul>
+</div></blockquote>
+</section>
 </section>
 
 
