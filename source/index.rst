@@ -20,5 +20,4 @@ documentation for details.
    logging
    api
    troubleshooting
-   contributing
 

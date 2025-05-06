@@ -1,10 +1,20 @@
 Common Problems
 ===============
 
-1. **MySQL Connection Errors**
+1. **Unenroll Participants**
 
-   - Check `.env` credentials
-   - Ensure MySQL is running
+   - SSH into the server and start MySQL shell or use a remote client to connect to the MySQL DB.
+   - Confirm the current status of the partipant.
+
+      .. code::block sql
+
+         SELECT studyId, enrolled FROM qualtrics_test.enrolled_table WHERE studyId='<PARTICIPANT_STUDY_ID>';
+
+   - Unenroll the participant with the following query.
+
+      .. code::block sql
+
+         UPDATE qualtrics_test.enrolled_table SET enrolled='0' WHERE studyId='<PARTICIPANT_STUDY_ID>';
 
 2. **Flask ImportError**
 
